@@ -1,6 +1,6 @@
 package Structs
 
-type Payment struct {
+type MakePayment struct {
 	StoreId string `json:"store_id"`
 	StorePasswd string `json:"store_passwd"`
 	TotalAmount string `json:"total_amount"`
