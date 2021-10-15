@@ -1,5 +1,4 @@
 
 .idea
 .vendor
-vendor/github.com/google/go-querystring/LICENSE
-vendor/github.com/google/go-querystring/query/encode.go
+vendor/*
