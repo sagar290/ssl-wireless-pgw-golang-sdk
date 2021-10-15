@@ -1,5 +1,5 @@
-//package ssl_wireless_pgw_golang_sdk
-package main
+package ssl_wireless_pgw_golang_sdk
+//package main
 
 import (
 	"bytes"
@@ -174,7 +174,7 @@ func (ssl *Ssl) TransactionQueryByTransactionId(data structs.TransactionQueryByT
 }
 
 
-func main() {
-
-}
+//func main() {
+//
+//}
 
