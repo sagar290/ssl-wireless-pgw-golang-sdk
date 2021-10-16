@@ -75,8 +75,9 @@ func (ssl *Ssl) ValidatePayment(data structs.OrderValidateBody) (structs.OrderVa
 	data.StorePasswd = ssl.StorePassword
 
 	v, _ := query.Values(data)
+
 	//resp, err := http.Get(ssl.ValidationURL + "val_id=" + data.ValId + "&store_id=" + data.StoreId + "&store_passwd=" + data.StorePasswd)
-	resp, err := http.Get(ssl.ValidationURL + v.Encode())
+	resp, err := http.Get(ssl.ValidationURL + helpers.Encode(v))
 
 	if err != nil {
 		log.Fatal(err)
@@ -96,7 +97,7 @@ func (ssl *Ssl) InitiateRefund(data structs.InitiateRefundBody) (structs.Initiat
 
 	v, _ := query.Values(data)
 
-	resp, err := http.Get(ssl.RefundURL + v.Encode())
+	resp, err := http.Get(ssl.RefundURL + helpers.Encode(v))
 
 	if err != nil {
 		log.Fatal(err)
@@ -116,7 +117,7 @@ func (ssl *Ssl) RefundQuery(data structs.RefundQueryURLBody) (structs.RefundQuer
 
 	v, _ := query.Values(data)
 
-	resp, err := http.Get(ssl.RefundQueryURL + v.Encode())
+	resp, err := http.Get(ssl.RefundQueryURL + helpers.Encode(v))
 
 	if err != nil {
 		log.Fatal(err)
@@ -136,7 +137,7 @@ func (ssl *Ssl) TransactionQueryBySessionId(data structs.TransactionQueryBySessi
 
 	v, _ := query.Values(data)
 
-	resp, err := http.Get(ssl.TransactionQueryBySessionIdURL + v.Encode())
+	resp, err := http.Get(ssl.TransactionQueryBySessionIdURL + helpers.Encode(v))
 
 	if err != nil {
 		log.Fatal(err)
@@ -156,7 +157,7 @@ func (ssl *Ssl) TransactionQueryByTransactionId(data structs.TransactionQueryByT
 
 	v, _ := query.Values(data)
 
-	resp, err := http.Get(ssl.TransactionQueryBySessionIdURL + v.Encode())
+	resp, err := http.Get(ssl.TransactionQueryBySessionIdURL + helpers.Encode(v))
 
 	if err != nil {
 		log.Fatal(err)
