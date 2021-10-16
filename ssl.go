@@ -44,7 +44,6 @@ func Init(storeId string, storePassword string, isLive bool) *Ssl {
 	}
 }
 
-
 func (ssl *Ssl) MakePayment(postBody structs.PaymentBody) (structs.PaymentResponse, error) {
 
 	var res structs.PaymentResponse
@@ -166,13 +165,4 @@ func (ssl *Ssl) TransactionQueryByTransactionId(data structs.TransactionQueryByT
 
 	json.NewDecoder(resp.Body).Decode(&res)
 	return res, nil
-}
-
-func main() {
-	isLive := false
-	ssl := Init("testbox", "qwerty", isLive)
-
-	var data structs.OrderValidateBody
-	ssl.ValidatePayment(data)
-
 }
