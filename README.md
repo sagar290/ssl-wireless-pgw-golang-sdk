@@ -1,4 +1,4 @@
-# ssl-wireless-pgw-golang-sdk
+# ssl-wireless-pgw-golang-sdk (Beta)
 > SSLCOMMERZ is the first payment gateway in Bangladesh opening doors for merchants to receive payments on the internet via their online stores. Their customers will be able to buy products online using their credit cards as well as bank accounts.
 
 ## Initialize payment
