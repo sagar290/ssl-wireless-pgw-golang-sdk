@@ -43,7 +43,7 @@ type PaymentBody struct {
 
 	// Shipping
 	ShippingMethod     string `json:"shipping_method"`
-	NumOfItem          string `json:"num_of_item"`
+	NumOfItem          int `json:"num_of_item"`
 	ShipName           string `json:"ship_name"`
 	ShipAdd1           string `json:"ship_add_1"`
 	ShipAdd2           string `json:"ship_add_2"`
@@ -179,7 +179,7 @@ func (ssl *PaymentBody) SetProductDetails(value ProductDetails)  {
 
 type ShippingDetails struct {
 	ShippingMethod     string
-	NumOfItem          string
+	NumOfItem          int
 	ShipName           string
 	ShipAdd1           string
 	ShipAdd2           string

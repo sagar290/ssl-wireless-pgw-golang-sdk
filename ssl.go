@@ -1,13 +1,12 @@
 package ssl_wireless_pgw_golang_sdk
-//package main
 
 import (
-	"bytes"
 	"encoding/json"
+	"github.com/google/go-querystring/query"
+	"github.com/sagar290/ssl_wireless_pgw_golang_sdk/helpers"
 	"github.com/sagar290/ssl_wireless_pgw_golang_sdk/structs"
 	"log"
 	"net/http"
-	"github.com/google/go-querystring/query"
 )
 
 type Ssl struct {
@@ -36,7 +35,7 @@ func Init(storeId string, storePassword string, isLive bool) *Ssl {
 		StoreID:                            storeId,
 		StorePassword:                      storePassword,
 		BaseUrl:                            url,
-		InitURL:                            url + "/gwprocess/v4/api.php",
+		InitURL:                            url + "/gwprocess/v4/api.php?",
 		ValidationURL:                      url + "/validator/api/validationserverAPI.php?",
 		RefundURL:                          url + "/validator/api/merchantTransIDvalidationAPI.php?",
 		RefundQueryURL:                     url + "/validator/api/merchantTransIDvalidationAPI.php?",
@@ -44,6 +43,7 @@ func Init(storeId string, storePassword string, isLive bool) *Ssl {
 		TransactionQueryByTransactionIdURL: url + "/validator/api/merchantTransIDvalidationAPI.php?",
 	}
 }
+
 
 func (ssl *Ssl) MakePayment(postBody structs.PaymentBody) (structs.PaymentResponse, error) {
 
@@ -53,23 +53,19 @@ func (ssl *Ssl) MakePayment(postBody structs.PaymentBody) (structs.PaymentRespon
 	postBody.StoreId = ssl.StoreID
 	postBody.StorePasswd = ssl.StorePassword
 
-	body, err := json.Marshal(postBody)
+	values := helpers.StructToMap(&postBody)
+
+	response, err := http.PostForm(ssl.InitURL, values)
 
 	if err != nil {
 		log.Fatal(err)
 		return structs.PaymentResponse{}, err
 	}
 
-	resp, err := http.Post(ssl.InitURL, "application/json",
-		bytes.NewBuffer(body))
-
-	if err != nil {
-		log.Fatal(err)
-		return structs.PaymentResponse{}, err
-	}
-
-	json.NewDecoder(resp.Body).Decode(&res)
+	json.NewDecoder(response.Body).Decode(&res)
+	// log.Printf("%v\n", res)
 	return res, nil
+
 }
 
 func (ssl *Ssl) ValidatePayment(data structs.OrderValidateBody) (structs.OrderValidateResponse, error) {
@@ -91,7 +87,6 @@ func (ssl *Ssl) ValidatePayment(data structs.OrderValidateBody) (structs.OrderVa
 	json.NewDecoder(resp.Body).Decode(&res)
 	return res, nil
 }
-
 
 func (ssl *Ssl) InitiateRefund(data structs.InitiateRefundBody) (structs.InitiateRefundResponse, error) {
 	var res structs.InitiateRefundResponse
@@ -173,8 +168,11 @@ func (ssl *Ssl) TransactionQueryByTransactionId(data structs.TransactionQueryByT
 	return res, nil
 }
 
+func main() {
+	isLive := false
+	ssl := Init("testbox", "qwerty", isLive)
 
-//func main() {
-//
-//}
+	var data structs.OrderValidateBody
+	ssl.ValidatePayment(data)
 
+}
