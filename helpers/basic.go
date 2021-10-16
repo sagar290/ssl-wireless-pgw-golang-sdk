@@ -54,7 +54,6 @@ func Encode(v url.Values) string {
 	var buf strings.Builder
 	keys := make([]string, 0, len(v))
 	for k := range v {
-
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
