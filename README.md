@@ -39,7 +39,7 @@ func main() {
 	body.SetFailUrl("https://bornonit.com")
 	body.SetIpnUrl("https://10minuteschool.com")
 
-	var response structs.PaymentResponse
+	var response ssl.structs.PaymentResponse
     
         // initialize the payment
 	response, _ = ssl.MakePayment(body)
