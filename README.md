@@ -12,7 +12,7 @@ func main() {
     isLive := false
 	ssl := ssl_wireless_pgw_golang_sdk.Init("store_id", "store_password", isLive)
 
-	body := ssl.structs.PaymentBody{
+	body := ssl_wireless_pgw_golang_sdk.structs.PaymentBody{
 		TranId:          "123fgh",
 		ShippingMethod:  "online",
 		ProductName:     "Test",
